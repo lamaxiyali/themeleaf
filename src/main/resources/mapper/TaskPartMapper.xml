@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.example.themeleaf.dao.TaskPartMapper" >
+  <resultMap id="BaseResultMap" type="com.example.themeleaf.entity.TaskPart" >
+    <id column="task_id" property="task_id" jdbcType="VARCHAR" />
+    <id column="task_userid" property="task_userid" jdbcType="VARCHAR" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="map" >
+    delete from task_part
+    where task_id = #{task_id,jdbcType=VARCHAR}
+      and task_userid = #{task_userid,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.example.themeleaf.entity.TaskPart" >
+    insert into task_part (task_id, task_userid)
+    values (#{task_id,jdbcType=VARCHAR}, #{task_userid,jdbcType=VARCHAR})
+  </insert>
+  <select id="selectAll" resultMap="BaseResultMap" >
+    select task_id, task_userid
+    from task_part
+  </select>
+  <select id="selectByTask" resultMap="BaseResultMap" parameterType="java.lang.String">
+    select task_id, task_userid from task_part where task_id = #{task_id, jdbcType=VARCHAR}
+  </select>
+  <select id="selectByPart" resultMap="BaseResultMap" parameterType="java.lang.String">
+    select task_id, task_userid from task_part where task_userid = #{task_userid, jdbcType=VARCHAR}
+  </select>
+</mapper>

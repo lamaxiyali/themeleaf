@@ -1,0 +1,144 @@
+{
+    "name": "basic-network",
+    "version": "1.0.0",
+    "client": {
+        "organization": "Sence1",
+        "connection": {
+            "timeout": {
+                "peer": {
+                    "endorser": "300"
+                },
+                "orderer": "300"
+            }
+        }
+    },
+    "channels": {
+        "mychannel": {
+            "orderers": [
+                "orderer.lamaxiya.com"
+            ],
+            "peers": {
+                "peer0.sence.maintenance1.com": {
+                    "endorsingPeer": true,
+                    "chaincodeQuery": true,
+                    "ledgerQuery": true,
+                    "eventSource": true
+                },
+                "peer0.sence.maintenance2.com": {
+                    "endorsingPeer": true,
+                    "chaincodeQuery": true,
+                    "ledgerQuery": true,
+                    "eventSource": true
+                }
+            }
+        }
+
+    },
+    "organizations": {
+        "Sence1": {
+            "mspid": "Sence1MSP",
+            "peers": [
+                "peer0.sence.maintenance1.com"
+            ],
+            "certificateAuthorities": [
+                "ca-sence1"
+            ],
+            "adminPrivateKeyPEM": {
+                "path": "src/main/resources/crypto-config/peerOrganizations/sence.maintenance1.com/users/Admin@sence.maintenance1.com/msp/keystore/priv_sk"
+            },
+            "signedCertPEM": {
+                "path": "src/main/resources/crypto-config/peerOrganizations/sence.maintenance1.com/users/Admin@sence.maintenance1.com/msp/signcerts/Admin@sence.maintenance1.com-cert.pem"
+            }
+        },
+        "Sence2": {
+            "mspid": "Sence2MSP",
+            "peers": [
+                "peer0.sence.maintenance2.com"
+            ],
+            "certificateAuthorities": [
+                "ca-sence2"
+            ],
+            "adminPrivateKeyPEM": {
+                "path": "src/main/resources/crypto-config/peerOrganizations/sence.maintenance2.com/users/Admin@sence.maintenance2.com/msp/keystore/priv_sk"
+            },
+            "signedCertPEM": {
+                "path": "src/main/resources/crypto-config/peerOrganizations/sence.maintenance2.com/users/Admin@sence.maintenance2.com/msp/signcerts/Admin@sence.maintenance2.com-cert.pem"
+            }
+        }
+    },
+    "orderers": {
+        "orderer.lamaxiya.com": {
+            "url": "grpcs://118.178.253.55:7050",
+            "mspid": "OrdererMSP",
+            "grpcOptions": {
+                "ssl-target-name-override": "orderer.lamaxiya.com",
+                "hostnameOverride": "orderer.lamaxiya.com"
+            },
+            "tlsCACerts": {
+                "path": "src/main/resources/crypto-config/ordererOrganizations/lamaxiya.com/orderers/orderer.lamaxiya.com/tls/ca.crt"
+            },
+            "adminPrivateKeyPEM": {
+                "path": "src/main/resources/crypto-config/ordererOrganizations/lamaxiya.com/users/Admin@lamaxiya.com/msp/keystore/priv_sk"
+            },
+            "signedCertPEM": {
+                "path": "src/main/resources/crypto-config/ordererOrganizations/lamaxiya.com/users/Admin@lamaxiya.com/msp/signcerts/Admin@lamaxiya.com-cert.pem"
+            }
+        }
+    },
+    "peers": {
+        "peer0.sence.maintenance1.com": {
+            "url": "grpcs://118.178.253.55:7051",
+            "grpcOptions": {
+                "ssl-target-name-override": "peer0.sence.maintenance1.com",
+                "hostnameOverride": "peer0.sence.maintenance1.com",
+                "request-timeout": 120001
+            },
+            "tlsCACerts": {
+                "path": "src/main/resources/crypto-config/peerOrganizations/sence.maintenance1.com/peers/peer0.sence.maintenance1.com/tls/ca.crt"
+            }
+        },
+        "peer0.sence.maintenance2.com": {
+            "url": "grpcs://118.178.253.55:9051",
+            "grpcOptions": {
+                "ssl-target-name-override": "peer0.sence.maintenance2.com",
+                "hostnameOverride": "peer0.sence.maintenance2.com",
+                "request-timeout": 120001
+            },
+            "tlsCACerts": {
+                "path": "src/main/resources/crypto-config/peerOrganizations/sence.maintenance2.com/peers/peer0.sence.maintenance2.com/tls/ca.crt"
+            }
+        }
+    },
+    "certificateAuthorities": {
+        "ca-sence1": {
+            "url": "https://118.178.253.55:7054",
+            "grpcOptions": {
+                "verify": true
+            },
+            "tlsCACerts": {
+                "path": "src/main/resources/crypto-config/peerOrganizations/sence.maintenance1.com/ca/ca.sence.maintenance1.com-cert.pem"
+            },
+            "registrar": [
+                {
+                    "enrollId": "admin",
+                    "enrollSecret": "adminpw"
+                }
+            ]
+        },
+        "ca-sence2": {
+            "url": "https://118.178.253.55:8054",
+            "grpcOptions": {
+                "verify": true
+            },
+            "tlsCACerts": {
+                "path": "src/main/resources/crypto-config/peerOrganizations/sence.maintenance2.com/ca/ca.sence.maintenance2.com-cert.pem"
+            },
+            "registrar": [
+                {
+                    "enrollId": "admin",
+                    "enrollSecret": "adminpw"
+                }
+            ]
+        }
+    }
+}

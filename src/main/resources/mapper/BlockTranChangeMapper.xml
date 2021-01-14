@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.example.themeleaf.dao.BlockTranChangeMapper" >
+  <resultMap id="BaseResultMap" type="com.example.themeleaf.entity.BlockTranChange" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="height" property="height" jdbcType="INTEGER" />
+    <result column="tran_number" property="tran_number" jdbcType="INTEGER" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from block_tran_change
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.example.themeleaf.entity.BlockTranChange" >
+    insert into block_tran_change (id, height, tran_number
+      )
+    values (#{id,jdbcType=INTEGER}, #{height,jdbcType=INTEGER}, #{tran_number,jdbcType=INTEGER}
+      )
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.example.themeleaf.entity.BlockTranChange" >
+    update block_tran_change
+    set height = #{height,jdbcType=INTEGER},
+      tran_number = #{tran_number,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select id, height, tran_number
+    from block_tran_change
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap" >
+    select id, height, tran_number
+    from block_tran_change
+  </select>
+  <select id="getInfoList" resultMap="BaseResultMap" >
+    select id, height, tran_number
+    from block_tran_change order by id desc limit #{count}
+  </select>
+  <select id="selectByHeightAndNumber" resultMap="BaseResultMap">
+    select id, height, tran_number
+    from block_tran_change where  height = #{height, jdbcType=INTEGER} and tran_number = #{tran_number, jdbcType=INTEGER}
+  </select>
+</mapper>

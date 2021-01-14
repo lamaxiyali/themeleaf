@@ -1,0 +1,33 @@
+/* 公共属性 */
+body{font-size: 14px; color: #666;}
+.zyl_center{text-align: center;}
+
+
+/* 间距 */
+.zyl_pad_01{padding: 5px 20px 5px 20px;}
+.zyl_mar_01{margin-top: 20px;}
+.zyl_mar_02{margin-top: 30px;}
+.zyl_mar_03{margin-top: 50px;}
+
+.head_color{
+  background-color: gainsboro ;
+}
+.img_color{
+  width: 400px;
+  height: 500px;
+}
+.relogin{
+  margin-bottom:10px;padding:15px;border-left:5px ;
+}
+.blockchain_color{
+  font-size: 30px;
+  color: #009688;
+  font-weight: bold;
+  font-family: fantasy;
+}
+.icon_color{
+  color: #009688;
+}
+.text_center{
+  text-align: center;
+}

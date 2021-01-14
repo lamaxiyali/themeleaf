@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.example.themeleaf.dao.RepassMapper" >
+  <resultMap id="BaseResultMap" type="com.example.themeleaf.entity.Repass" >
+    <id column="email" property="email" jdbcType="VARCHAR" />
+    <result column="code" property="code" jdbcType="VARCHAR" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from repass
+    where email = #{email,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.example.themeleaf.entity.Repass" >
+    insert into repass (email, code)
+    values (#{email,jdbcType=VARCHAR}, #{code,jdbcType=VARCHAR})
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.example.themeleaf.entity.Repass" >
+    update repass
+    set code = #{code,jdbcType=VARCHAR}
+    where email = #{email,jdbcType=VARCHAR}
+  </update>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select email, code
+    from repass
+    where email = #{email,jdbcType=VARCHAR}
+  </select>
+  <select id="selectByCode" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select email, code
+    from repass
+    where code = #{code,jdbcType=VARCHAR}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap" >
+    select email, code
+    from repass
+  </select>
+</mapper>

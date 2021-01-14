@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.example.themeleaf.dao.TransactionChangeMapper" >
+  <resultMap id="BaseResultMap" type="com.example.themeleaf.entity.TransactionChange" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="normal_tran" property="normal_tran" jdbcType="INTEGER" />
+    <result column="config_tran" property="config_tran" jdbcType="INTEGER" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from transaction_change
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.example.themeleaf.entity.TransactionChange" >
+    insert into transaction_change (id, normal_tran, config_tran
+      )
+    values (#{id,jdbcType=INTEGER}, #{normal_tran,jdbcType=INTEGER}, #{config_tran,jdbcType=INTEGER}
+      )
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.example.themeleaf.entity.TransactionChange" >
+    update transaction_change
+    set normal_tran = #{normal_tran,jdbcType=INTEGER},
+      config_tran = #{config_tran,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select id, normal_tran, config_tran
+    from transaction_change
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap" >
+    select id, normal_tran, config_tran
+    from transaction_change
+  </select>
+  <select id="getInfoList" resultMap="BaseResultMap" >
+    select id, normal_tran, config_tran
+    from transaction_change order by id desc limit #{count}
+  </select>
+  <select id="selectByNormalAndConfig" resultMap="BaseResultMap">
+    select id, normal_tran, config_tran
+    from transaction_change where  normal_tran = #{normal_tran, jdbcType=INTEGER} and config_tran = #{config_tran, jdbcType=INTEGER}
+  </select>
+</mapper>
