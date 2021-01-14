@@ -34,6 +34,7 @@ public class LoginControl {
         try {
             subject.login(usernamePasswordToken);
             System.out.println("lama2233--test");
+            System.out.println("lamaxiya--test");
             return new Result(200);
         } catch (AuthenticationException e) {
             String message = "账号密码错误";
