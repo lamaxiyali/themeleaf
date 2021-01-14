@@ -18,6 +18,7 @@ public class Tee {
 //        String js = JSONObject.toJSONString(jsonArray);
         List<Car> carList = new ArrayList<Car>();
         carList = JSONObject.parseArray(sd, Car.class);
+        System.out.println("ceshsi");
         for (Car car:carList
         ) {
             System.out.println(car.getKey()+":");
