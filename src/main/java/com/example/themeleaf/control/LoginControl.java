@@ -33,8 +33,7 @@ public class LoginControl {
         UsernamePasswordToken usernamePasswordToken = new UsernamePasswordToken(username, requestUser.getPassword());
         try {
             subject.login(usernamePasswordToken);
-            System.out.println(subject.getPrincipal().toString());
-            System.out.println(subject.getPrincipals().asList());
+            System.out.println("lama2233--test");
             return new Result(200);
         } catch (AuthenticationException e) {
             String message = "账号密码错误";
