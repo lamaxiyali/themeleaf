@@ -3,21 +3,22 @@ package com.example.themeleaf.control;
 import com.example.themeleaf.entity.Userinfo;
 import com.example.themeleaf.result.Result;
 import com.example.themeleaf.service.LoginService;
-import com.google.logging.type.HttpRequest;
-import io.netty.handler.codec.spdy.SpdyHttpHeaders;
+import com.example.themeleaf.service.impl.FabricGateway;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.UsernamePasswordToken;
 import org.apache.shiro.crypto.SecureRandomNumberGenerator;
 import org.apache.shiro.crypto.hash.SimpleHash;
 import org.apache.shiro.subject.Subject;
+import org.hyperledger.fabric.gateway.Contract;
+import org.hyperledger.fabric.gateway.ContractException;
+import org.hyperledger.fabric.gateway.Network;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.HtmlUtils;
 
 import javax.annotation.Resource;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
+import java.util.concurrent.TimeoutException;
 
 @Controller
 @RequestMapping("/")
@@ -45,7 +46,7 @@ public class LoginControl {
     @CrossOrigin
     @RequestMapping("/api/register")
     @ResponseBody
-    Result addUser(@RequestBody Userinfo userinfo){
+    Result addUser(@RequestBody Userinfo userinfo) throws InterruptedException, TimeoutException, ContractException {
         String username1 = userinfo.getUsername();
         username1 = HtmlUtils.htmlEscape(username1);
         userinfo.setUsername(username1);
@@ -59,8 +60,15 @@ public class LoginControl {
         int result = loginService.addUser(userinfo);
         String re = result +"";
         if(result == 0){
-            System.out.println( "注册成功");
-            return new Result(200);
+            Network network =FabricGateway.gateway.getNetwork("mychannel");
+            Contract contract = network.getContract("userbasicinfo");
+            byte[] resu = contract.submitTransaction("Set", userinfo.getUsername(), userinfo.getEmail(), "0.6", "0.0", userinfo.getUsername());
+            if(!"1".equals(new String(resu))){
+                System.out.println( "注册成功");
+                return new Result(200);
+            }
+            System.out.println("注册信息到区块链出错");
+            return new Result(402);
         }else if(result ==1){
             System.out.println("注册用户已经存在");
             return new Result(400);

@@ -52,7 +52,7 @@ public class MetricsServiceImpl implements MetricsService {
             if(s.toString().startsWith("ledger_blockchain_height")){
                 ledger.setLedger_blockchain_height(mapper.get(s));
             }
-            if(s.toString().startsWith("ledger_transaction_count{chaincode=\"mycc:1\",channel=\"mychannel\",transaction_type=\"ENDORSER_TRANSACTION\",validation_code=\"VALID\"}")){
+            if(s.toString().startsWith("ledger_transaction_count{chaincode=\"userbasicinfo:1\",channel=\"mychannel\",transaction_type=\"ENDORSER_TRANSACTION\",validation_code=\"VALID\"}")){
                 ledger.setLedger_transaction_count(mapper.get(s));
             }
             if(s.toString().startsWith("endorser_proposals_received")){
@@ -88,25 +88,35 @@ public class MetricsServiceImpl implements MetricsService {
         Map<String, Double> mapper = getMetrics(0);
         Chaincode chaincode = new Chaincode();
         Set<String> keys = mapper.keySet();
+        List<ChaincodeDesc> listchaincode = new ArrayList<>();
         for (String s: keys
              ) {
             if(s.startsWith("chaincode_launch_duration_count")){
-                chaincode.setChaincode_launch_duration_count(mapper.get(s));
-                chaincode.setList(getDesc("mycc", "mychannel", s));
+                if(s.contains("multiattributeranking")){
+                    listchaincode.add(getDesc("multiattributeranking", "mychannel", s));
+                }
+                if(s.contains("userattributesetupload")){
+                    listchaincode.add(getDesc("userattributesetupload", "mychannel", s));
+                }
+                if(s.contains("userbasicinfo")){
+                    listchaincode.add(getDesc("userbasicinfo", "mychannel", s));
+                }
             }
-            if(s.startsWith("chaincode_shim_requests_completed{chaincode=\"mycc_1:499c930c033864d90e4fcac68113bd10748065b33295ba12d0a8b39b764d8bd4\",channel=\"mychannel\",success=\"true\",type=\"GET_STATE\"}")){
+            if(s.startsWith("chaincode_shim_requests_completed{chaincode=\"userbasicinfo_1:67877d1ee7e4846e93fc392a6d21c78250a2d2121652fefc2b00b1003340a6ef\",channel=\"mychannel\",success=\"true\",type=\"GET_STATE\"}")){
                 chaincode.setChaincode_shim_requests_completed_get(mapper.get(s));
             }
-            if(s.startsWith("chaincode_shim_requests_completed{chaincode=\"mycc_1:499c930c033864d90e4fcac68113bd10748065b33295ba12d0a8b39b764d8bd4\",channel=\"mychannel\",success=\"true\",type=\"PUT_STATE\"}")){
+            if(s.startsWith("chaincode_shim_requests_completed{chaincode=\"userbasicinfo_1:67877d1ee7e4846e93fc392a6d21c78250a2d2121652fefc2b00b1003340a6ef\",channel=\"mychannel\",success=\"true\",type=\"PUT_STATE\"}")){
                 chaincode.setChaincode_shim_requests_completed_put(mapper.get(s));
             }
-            if(s.startsWith("chaincode_shim_requests_received{chaincode=\"mycc_1:499c930c033864d90e4fcac68113bd10748065b33295ba12d0a8b39b764d8bd4\",channel=\"mychannel\",type=\"GET_STATE\"}")){
+            if(s.startsWith("chaincode_shim_requests_received{chaincode=\"userbasicinfo_1:67877d1ee7e4846e93fc392a6d21c78250a2d2121652fefc2b00b1003340a6ef\",channel=\"mychannel\",type=\"GET_STATE\"}")){
                 chaincode.setChaincode_shim_requests_received_get(mapper.get(s));
             }
-            if(s.startsWith("chaincode_shim_requests_received{chaincode=\"mycc_1:499c930c033864d90e4fcac68113bd10748065b33295ba12d0a8b39b764d8bd4\",channel=\"mychannel\",type=\"PUT_STATE\"}")){
+            if(s.startsWith("chaincode_shim_requests_received{chaincode=\"userbasicinfo_1:67877d1ee7e4846e93fc392a6d21c78250a2d2121652fefc2b00b1003340a6ef\",channel=\"mychannel\",type=\"PUT_STATE\"}")){
                 chaincode.setChaincode_shim_requests_received_put(mapper.get(s));
             }
         }
+        chaincode.setChaincode_launch_duration_count((double) listchaincode.size());
+        chaincode.setList(listchaincode);
         return chaincode;
     }
 
@@ -151,7 +161,7 @@ public class MetricsServiceImpl implements MetricsService {
         return channel;
     }
 
-    private List<ChaincodeDesc> getDesc(String name, String channel, String s){
+    private ChaincodeDesc getDesc(String name, String channel, String s){
         String str1 = s.substring(s.indexOf('{'), s.indexOf('}')+1);
         String[] strs = str1.split(",");
         String id = strs[0].substring(strs[0].indexOf('"')+1, strs[0].lastIndexOf('"'));
@@ -167,8 +177,6 @@ public class MetricsServiceImpl implements MetricsService {
         chaincodeDesc.setVersion(version);
         chaincodeDesc.setChaincode_number(id);
         chaincodeDesc.setChannel(channel);
-        List<ChaincodeDesc> list = new ArrayList<>();
-        list.add(chaincodeDesc);
-        return list;
+        return chaincodeDesc;
     }
 }
