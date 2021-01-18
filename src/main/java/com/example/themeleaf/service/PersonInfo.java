@@ -10,6 +10,8 @@ public interface PersonInfo {
 
     void insertSystemMessage(PersonMessage personMessage);
 
+    void insertPersonMessage(PersonMessage personMessage);
+
     List<PersonMessage> getAllSystemMessage(String sys);
 
     List<PersonMessage> getAllMessage();

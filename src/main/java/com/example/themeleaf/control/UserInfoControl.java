@@ -60,6 +60,7 @@ public class UserInfoControl {
         return username;
     }
 
+
     @RequestMapping(value = "/api/system/message")
     public void insertSysMessage(){
         WebSocket ws = new WebSocket();

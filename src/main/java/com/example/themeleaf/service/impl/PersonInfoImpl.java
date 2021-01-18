@@ -37,6 +37,11 @@ public class PersonInfoImpl implements PersonInfo {
     }
 
     @Override
+    public void insertPersonMessage(PersonMessage personMessage) {
+        personMessageMapper.insert(personMessage);
+    }
+
+    @Override
     public List<PersonMessage> getAllSystemMessage(String sys) {
         List<PersonMessage> personMessages = personMessageMapper.selectAll();
         personMessages = personMessages.stream().filter(personMessage -> personMessage.getUname().equals(sys)
