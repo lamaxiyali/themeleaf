@@ -1,5 +1,6 @@
 package com.example.themeleaf.control;
 
+import com.alibaba.fastjson.JSONObject;
 import com.example.themeleaf.dao.BlockTranChangeMapper;
 import com.example.themeleaf.dao.TransactionChangeMapper;
 import com.example.themeleaf.entity.BlockTranChange;
@@ -7,10 +8,13 @@ import com.example.themeleaf.entity.Metrics.Chaincode;
 import com.example.themeleaf.entity.Metrics.Channel;
 import com.example.themeleaf.entity.Metrics.Ledger;
 import com.example.themeleaf.entity.TransactionChange;
+import com.example.themeleaf.entity.UserBaicInfoInBlockchain;
 import com.example.themeleaf.result.Accpt1;
 import com.example.themeleaf.service.MetricsService;
 import com.example.themeleaf.service.impl.BlockTranInfoImpl;
 import com.example.themeleaf.service.impl.FabricGateway;
+import org.hyperledger.fabric.gateway.Contract;
+import org.hyperledger.fabric.gateway.ContractException;
 import org.hyperledger.fabric.gateway.Network;
 import org.hyperledger.fabric.sdk.BlockInfo;
 import org.hyperledger.fabric.sdk.exception.CryptoException;
@@ -81,5 +85,16 @@ public class BlockchainMetricsControl {
         }
         return lists;
         //获取合约对象
+    }
+
+    @RequestMapping(value = "/api/allusersonchain")
+    public List<UserBaicInfoInBlockchain> getAllUsersInfoFromBlockchain() throws ContractException {
+        Network network = FabricGateway.gateway.getNetwork("mychannel");
+        Contract contract = network.getContract("userbasicinfo");
+        byte[] result = contract.evaluateTransaction("ReadAllUserInfo", "1", "z");
+        List<UserBaicInfoInBlockchain> list;
+        System.out.println(new String(result));
+        list = JSONObject.parseArray(new String(result), UserBaicInfoInBlockchain.class);
+        return list;
     }
 }

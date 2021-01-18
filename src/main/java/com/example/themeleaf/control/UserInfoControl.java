@@ -93,12 +93,6 @@ public class UserInfoControl {
             return null;
         }
         return list.get(0);
-
     }
-
-
-
-
-
 
 }
