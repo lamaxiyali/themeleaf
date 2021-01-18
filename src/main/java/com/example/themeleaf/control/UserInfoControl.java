@@ -1,18 +1,25 @@
 package com.example.themeleaf.control;
 
 
+import com.alibaba.fastjson.JSONObject;
 import com.example.themeleaf.dao.UserinfoMapper;
 import com.example.themeleaf.entity.PersonMessage;
+import com.example.themeleaf.entity.UserBaicInfoInBlockchain;
 import com.example.themeleaf.entity.Userinfo;
 import com.example.themeleaf.service.PersonInfo;
 import com.example.themeleaf.service.WebSocket;
+import com.example.themeleaf.service.impl.FabricGateway;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.subject.Subject;
+import org.hyperledger.fabric.gateway.Contract;
+import org.hyperledger.fabric.gateway.ContractException;
+import org.hyperledger.fabric.gateway.Network;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
+import javax.json.JsonObject;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Date;
@@ -71,6 +78,22 @@ public class UserInfoControl {
     @RequestMapping(value = "/api/user/allmessage")
     public List<PersonMessage> getAllMessage(){
         return personInfo.getAllMessage();
+    }
+
+    @RequestMapping(value = "/api/user/credit")
+    public UserBaicInfoInBlockchain getUserBasicInfoFromBlockchain(@RequestBody UserBaicInfoInBlockchain userBaicInfoInBlockchain) throws ContractException {
+        Network network = FabricGateway.gateway.getNetwork("mychannel");
+        Contract contract = network.getContract("userbasicinfo");
+        byte[] result = contract.evaluateTransaction("ReadUserInfoByUserName", userBaicInfoInBlockchain.getKey());
+        List<UserBaicInfoInBlockchain> list;
+        System.out.println(new String(result));
+        list = JSONObject.parseArray(new String(result), UserBaicInfoInBlockchain.class);
+        if (list.size() == 0){
+            System.out.println("链上不存在此用户");
+            return null;
+        }
+        return list.get(0);
+
     }
 
 
