@@ -1,13 +1,13 @@
--- MySQL dump 10.13  Distrib 8.0.19, for Win64 (x86_64)
+-- MySQL dump 10.13  Distrib 8.0.15, for Win64 (x86_64)
 --
 -- Host: localhost    Database: network
 -- ------------------------------------------------------
--- Server version	8.0.19
+-- Server version	8.0.15
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!50503 SET NAMES utf8 */;
+ SET NAMES utf8 ;
 /*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
 /*!40103 SET TIME_ZONE='+00:00' */;
 /*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
@@ -21,13 +21,13 @@
 
 DROP TABLE IF EXISTS `block_tran_change`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+ SET character_set_client = utf8mb4 ;
 CREATE TABLE `block_tran_change` (
-  `id` int NOT NULL AUTO_INCREMENT,
-  `height` int NOT NULL,
-  `tran_number` int NOT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `height` int(11) NOT NULL,
+  `tran_number` int(11) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=174 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=167 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -36,7 +36,7 @@ CREATE TABLE `block_tran_change` (
 
 LOCK TABLES `block_tran_change` WRITE;
 /*!40000 ALTER TABLE `block_tran_change` DISABLE KEYS */;
-INSERT INTO `block_tran_change` VALUES (151,9,3),(152,10,4),(153,13,7),(154,14,8),(155,15,9),(156,16,10),(157,17,11),(158,20,14),(159,24,14),(160,25,15),(161,38,28),(162,40,30),(163,41,31),(164,42,32),(165,45,35),(166,8,2),(167,55,18),(168,15,1),(169,21,7),(170,24,10),(171,25,11),(172,26,12),(173,27,13);
+INSERT INTO `block_tran_change` VALUES (151,9,3),(152,10,4),(153,13,7),(154,14,8),(155,15,9),(156,16,10),(157,17,11),(158,20,14),(159,24,14),(160,25,15),(161,38,28),(162,40,30),(163,41,31),(164,42,32),(165,45,35),(166,30,16);
 /*!40000 ALTER TABLE `block_tran_change` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -46,9 +46,9 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `fabric`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+ SET character_set_client = utf8mb4 ;
 CREATE TABLE `fabric` (
-  `id` int NOT NULL AUTO_INCREMENT,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `number` varchar(256) NOT NULL,
   `name` varchar(256) NOT NULL,
   `color` varchar(256) NOT NULL,
@@ -74,14 +74,14 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `person_message`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+ SET character_set_client = utf8mb4 ;
 CREATE TABLE `person_message` (
-  `id` int NOT NULL AUTO_INCREMENT,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `uname` varchar(45) NOT NULL,
   `message` varchar(255) NOT NULL,
   `messagetype` varchar(45) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -90,7 +90,7 @@ CREATE TABLE `person_message` (
 
 LOCK TABLES `person_message` WRITE;
 /*!40000 ALTER TABLE `person_message` DISABLE KEYS */;
-INSERT INTO `person_message` VALUES (1,'system','公共消息---系统更新---鉴于用户反馈，对系统延迟较大进行了更新---2021-1-15 20:44:45','系统消息'),(2,'system','公共消息---系统更新---鉴于用户反馈，对系统延迟较大进行了更新---2021-1-15 21:07:08','系统消息'),(3,'admin','个人消息---任务提醒1---鉴于您已参与任务，请及时提交相关数据---2021-1-15 21:17:30','个人消息'),(4,'lamaxiya','个人消息---任务提醒---鉴于您已参与任务，请及时提交相关数据---2021-1-15 21:17:30','个人消息'),(5,'admin','个人消息---任务提醒---鉴于您已参与任务，请及时提交相关数据---2021-1-15 21:17:30','个人消息'),(6,'test5','个人消息---注册信息---您已经成功注册信息到区块链上---2021-1-18 21:41:46','个人消息');
+INSERT INTO `person_message` VALUES (1,'system','公共消息---系统更新---鉴于用户反馈，对系统延迟较大进行了更新---2021-1-15 20:44:45','系统消息'),(2,'system','公共消息---系统更新---鉴于用户反馈，对系统延迟较大进行了更新---2021-1-15 21:07:08','系统消息'),(3,'admin','个人消息---任务提醒1---鉴于您已参与任务，请及时提交相关数据---2021-1-15 21:17:30','个人消息'),(4,'lamaxiya','个人消息---任务提醒---鉴于您已参与任务，请及时提交相关数据---2021-1-15 21:17:30','个人消息'),(5,'admin','个人消息---任务提醒---鉴于您已参与任务，请及时提交相关数据---2021-1-15 21:17:30','系统消息');
 /*!40000 ALTER TABLE `person_message` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -100,7 +100,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `repass`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+ SET character_set_client = utf8mb4 ;
 CREATE TABLE `repass` (
   `email` varchar(255) NOT NULL,
   `code` varchar(255) NOT NULL,
@@ -114,7 +114,7 @@ CREATE TABLE `repass` (
 
 LOCK TABLES `repass` WRITE;
 /*!40000 ALTER TABLE `repass` DISABLE KEYS */;
-INSERT INTO `repass` VALUES ('3293376887@qq.com','305138'),('baohuili@bupt.edu.cn','676148');
+INSERT INTO `repass` VALUES ('3293376887@qq.com','720610'),('baohuili@bupt.edu.cn','676148');
 /*!40000 ALTER TABLE `repass` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -124,7 +124,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `sence_data`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+ SET character_set_client = utf8mb4 ;
 CREATE TABLE `sence_data` (
   `taskid` varchar(255) NOT NULL,
   PRIMARY KEY (`taskid`)
@@ -146,18 +146,18 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `sense_task_info`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+ SET character_set_client = utf8mb4 ;
 CREATE TABLE `sense_task_info` (
   `tid` varchar(45) NOT NULL,
   `task_name` varchar(45) NOT NULL,
   `task_from` varchar(45) DEFAULT NULL,
-  `people_limit` int NOT NULL,
+  `people_limit` int(11) NOT NULL,
   `task_type` enum('温度感知','噪声感知','空气质量感知') NOT NULL,
   `task_area` varchar(45) NOT NULL,
   `task_date` varchar(45) NOT NULL,
   `task_startTime` varchar(45) NOT NULL,
   `task_endTime` varchar(45) NOT NULL,
-  `task_price` int NOT NULL,
+  `task_price` int(11) NOT NULL,
   `task_status` enum('未开始','已结束','进行中') NOT NULL,
   `task_desc` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`tid`)
@@ -180,16 +180,15 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `task_bidding_attr`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+ SET character_set_client = utf8mb4 ;
 CREATE TABLE `task_bidding_attr` (
   `taskid` varchar(255) NOT NULL,
   `username` varchar(255) NOT NULL,
-  `expectprice` int NOT NULL,
-  `samplingfrequency` int NOT NULL,
-  `samplingtime` int NOT NULL,
-  `locationaware` int NOT NULL,
-  `positioningaccuracy` int NOT NULL,
-  `biddingnot` int NOT NULL,
+  `expectprice` int(11) NOT NULL,
+  `samplingfrequency` int(11) NOT NULL,
+  `samplingtime` int(11) NOT NULL,
+  `locationaware` int(11) NOT NULL,
+  `positioningaccuracy` int(11) NOT NULL,
   PRIMARY KEY (`taskid`,`username`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -209,7 +208,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `task_part`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+ SET character_set_client = utf8mb4 ;
 CREATE TABLE `task_part` (
   `task_id` varchar(45) NOT NULL,
   `task_userid` varchar(45) NOT NULL,
@@ -223,8 +222,36 @@ CREATE TABLE `task_part` (
 
 LOCK TABLES `task_part` WRITE;
 /*!40000 ALTER TABLE `task_part` DISABLE KEYS */;
-INSERT INTO `task_part` VALUES ('36gayn','admin'),('36gayn','admin2'),('36gayn','lamaxiya'),('36gayn','test1'),('dgp5y5','lamaxiya'),('pjmhmh','lamaxiya');
+INSERT INTO `task_part` VALUES ('36gayn','admin'),('36gayn','admin2'),('36gayn','lamaxiya'),('dgp5y5','lamaxiya'),('pjmhmh','lamaxiya');
 /*!40000 ALTER TABLE `task_part` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `taskpub_info`
+--
+
+DROP TABLE IF EXISTS `taskpub_info`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+ SET character_set_client = utf8mb4 ;
+CREATE TABLE `taskpub_info` (
+  `username` varchar(225) NOT NULL,
+  `email` varchar(225) NOT NULL,
+  `password` varchar(225) NOT NULL,
+  `salt` varchar(225) NOT NULL,
+  `phone` varchar(225) DEFAULT NULL,
+  `name` varchar(225) DEFAULT NULL,
+  `cardid` varchar(225) DEFAULT NULL,
+  PRIMARY KEY (`username`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `taskpub_info`
+--
+
+LOCK TABLES `taskpub_info` WRITE;
+/*!40000 ALTER TABLE `taskpub_info` DISABLE KEYS */;
+/*!40000 ALTER TABLE `taskpub_info` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -233,13 +260,13 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `transaction_change`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+ SET character_set_client = utf8mb4 ;
 CREATE TABLE `transaction_change` (
-  `id` int NOT NULL AUTO_INCREMENT,
-  `normal_tran` int NOT NULL,
-  `config_tran` int NOT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `normal_tran` int(11) NOT NULL,
+  `config_tran` int(11) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -248,7 +275,7 @@ CREATE TABLE `transaction_change` (
 
 LOCK TABLES `transaction_change` WRITE;
 /*!40000 ALTER TABLE `transaction_change` DISABLE KEYS */;
-INSERT INTO `transaction_change` VALUES (1,22,2),(2,23,2),(3,26,2),(4,27,2),(5,29,2),(6,31,2),(7,33,2),(8,35,2),(9,37,2),(10,42,2),(11,50,2),(12,52,2),(13,12,2),(14,18,2);
+INSERT INTO `transaction_change` VALUES (1,22,2),(2,23,2),(3,26,2),(4,27,2),(5,29,2),(6,31,2),(7,33,2),(8,35,2),(9,37,2),(10,42,2);
 /*!40000 ALTER TABLE `transaction_change` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -258,11 +285,11 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `user_credit_reward`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+ SET character_set_client = utf8mb4 ;
 CREATE TABLE `user_credit_reward` (
   `username` varchar(255) NOT NULL,
-  `currentcredit` int NOT NULL,
-  `currentreward` int NOT NULL,
+  `currentcredit` int(11) NOT NULL,
+  `currentreward` int(11) NOT NULL,
   PRIMARY KEY (`username`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -282,7 +309,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `user_task_info`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+ SET character_set_client = utf8mb4 ;
 CREATE TABLE `user_task_info` (
   `taskid` varchar(255) NOT NULL,
   `tasktitle` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
@@ -308,7 +335,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `userinfo`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+ SET character_set_client = utf8mb4 ;
 CREATE TABLE `userinfo` (
   `username` varchar(255) NOT NULL,
   `password` varchar(255) DEFAULT NULL,
@@ -320,7 +347,7 @@ CREATE TABLE `userinfo` (
   `profession` varchar(255) DEFAULT NULL,
   `education` varchar(255) DEFAULT NULL,
   `major` varchar(255) DEFAULT NULL,
-  `age` int DEFAULT NULL,
+  `age` int(11) DEFAULT NULL,
   PRIMARY KEY (`username`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -331,9 +358,13 @@ CREATE TABLE `userinfo` (
 
 LOCK TABLES `userinfo` WRITE;
 /*!40000 ALTER TABLE `userinfo` DISABLE KEYS */;
-INSERT INTO `userinfo` VALUES ('aaaa','ead66bf8d4b04463f4090b38e9a38691','+nJvHoeYHzVfuXI0U7RJIw==','0@qq.com','','aa','','','','',23),('admin','f0a9ecdf5d7f6383b0843cd2165be113','1VcI8ffhrCMPlOnSj4Wkew==','3293376887@qq.com','',NULL,'','','','',0),('admin2','e40ec2f8e691dad487e672eaf716b682','pH7XWHViO1ghzoZUG8sfnA==','3293376887q@gmail.com','',NULL,'','','','',0),('lama','0d4f71e95ef6280955e52d2bf988b3d2','1a8f21+BBSq6d3awEPgmIw==','123@qq.com','','','','','','',23),('lamaxiya','eabb0d0aed44680c58c1294506aa7c29','ZguYT6McNUX88L4Ca6xKDw==','baohuili@bupt.edu.cn','',NULL,'','','','',0),('test1','36340b204983df74ef9f7c392368b8db','RBzWLK5d22TqqzIZF4A43g==','1@qq.com','','','','student','undergraduate','',21),('test2','0492dfe4aa9ba190b6beed881fa4623a','Biw8BQvLLlnKPdXeHef5aA==','2@qq.com','12232323','lama li','','teacher','Dr','',22),('test3','9d7a7783ff4fbaeafbba7d55b14a9cf8','5v4dRU+5uE+Y+qRetCEnRw==','3@qq.com','','','','student','','',23),('test4','8dd6f3996d4229ecd1c65d1ecc338b79','7XD1h6y/yvaJELrRYM2xzQ==','4@qq.com','','','','student','','',25),('test5','c65cfae7c218324cfacb297aee53739a','SduhjBZoH+G3GVdlKU8+9g==','5@qq.com','','','','student','other','',23);
+INSERT INTO `userinfo` VALUES ('admin','f0a9ecdf5d7f6383b0843cd2165be113','1VcI8ffhrCMPlOnSj4Wkew==','3293376887@qq.com','',NULL,'','','','',0),('admin2','e40ec2f8e691dad487e672eaf716b682','pH7XWHViO1ghzoZUG8sfnA==','3293376887q@gmail.com','',NULL,'','','','',0),('lamaxiya','eabb0d0aed44680c58c1294506aa7c29','ZguYT6McNUX88L4Ca6xKDw==','baohuili@bupt.edu.cn','',NULL,'','','','',0),('test1','d724396d1337b0650ccf7e95cea0f2bd','GoJwlNPoQX7s+tPDEV/LvA==','121212@qqq.com','13831275102',NULL,'411***117411','teacher','Dr','计算机技术',25),('test2','5f1b4ddd80296bf2505353b26dd829f3','BSrEZDZ9jSDVc+VGaD8Aew==','12@qq.com','13831275102','lama li','411**7732','student','graduate','计算机技术',24);
 /*!40000 ALTER TABLE `userinfo` ENABLE KEYS */;
 UNLOCK TABLES;
+
+--
+-- Dumping events for database 'network'
+--
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
@@ -344,4 +375,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2021-01-18 21:59:34
+-- Dump completed on 2021-01-31 10:22:26
