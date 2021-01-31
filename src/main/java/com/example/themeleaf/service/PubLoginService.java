@@ -10,6 +10,6 @@ public interface PubLoginService {
     int insertCode(String email, String code);
     Repass selectByCode(String code);
     int updateByEmail(String email, String password, String salt);
-    int updateByUsername(String email, String password, String salt);
+    int updateByUsername(String username, String password, String salt);
     Userinfo getByUsername(String username);
 }

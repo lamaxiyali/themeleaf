@@ -26,36 +26,65 @@ public class PubLoginServiceImpl implements PubLoginService {
 
     @Override
     public int checkEmail(String email) {
-        return 0;
+        Userinfo userinfo = taskpubinfoMapper.selectByEmail(email);
+        if (userinfo != null){
+            return 0;
+        }else {
+            return 1;
+        }
     }
 
     @Override
     public int addUser(Userinfo userinfo) {
-        return 0;
+        Userinfo userinfo1 = taskpubinfoMapper.selectByPrimaryKey(userinfo.getUsername());
+        if (userinfo1 != null){
+            return 1;
+        }else if(taskpubinfoMapper.selectByEmail(userinfo.getEmail()) != null){
+            return 2;
+        } else {
+            taskpubinfoMapper.insert(userinfo);
+            return 0;
+        }
     }
 
     @Override
     public int insertCode(String email, String code) {
+        Repass repass = new Repass(email,code);
+        Repass repass1 = repassMapper.selectByPrimaryKey(email);
+        if(repass1 != null){
+            repassMapper.updateByPrimaryKey(repass);
+            return 0;
+        }
+        repassMapper.insert(repass);
         return 0;
     }
 
     @Override
     public Repass selectByCode(String code) {
+        Repass repass = repassMapper.selectByCode(code);
+        if(repass != null){
+            return repass;
+        }
         return null;
     }
 
     @Override
     public int updateByEmail(String email, String password, String salt) {
+        Userinfo userinfo = new Userinfo(null,password, salt, email,null,null,null,null,null,null,null);
+        taskpubinfoMapper.updateByEmail(userinfo);
         return 0;
     }
 
     @Override
-    public int updateByUsername(String email, String password, String salt) {
+    public int updateByUsername(String username, String password, String salt) {
+        Userinfo userinfo = new Userinfo(username, password, salt,null,null,null,null,null,null,null,null);
+        taskpubinfoMapper.updateByUsername(userinfo);
         return 0;
     }
 
     @Override
     public Userinfo getByUsername(String username) {
-        return null;
+        Userinfo userinfo = taskpubinfoMapper.selectByUsername(username);
+        return userinfo;
     }
 }
