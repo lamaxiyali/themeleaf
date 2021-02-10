@@ -28,6 +28,7 @@
     <result column="task_price" property="task_price" jdbcType="INTEGER" />
     <result column="task_status" property="task_status" jdbcType="CHAR" />
     <result column="task_desc" property="task_desc" jdbcType="VARCHAR" />
+    <result column="task_nowpartin" property="task_nowpartin" jdbcType="INTEGER" />
     <collection property="taskPartList" ofType="com.example.themeleaf.entity.TaskPart">
       <result property="task_id" column="task_id" jdbcType="VARCHAR"/>
       <result property="task_userid" column="task_userid" jdbcType="VARCHAR"/>
@@ -41,12 +42,12 @@
     insert into sense_task_info (tid, task_name, task_from,
       people_limit, task_type, task_area,
       task_date, task_startTime, task_endTime,
-      task_price, task_status, task_desc
+      task_price, task_status, task_desc, task_nowpartin
       )
     values (#{tid,jdbcType=VARCHAR}, #{task_name,jdbcType=VARCHAR}, #{task_from,jdbcType=VARCHAR},
       #{people_limit,jdbcType=INTEGER}, #{task_type,jdbcType=CHAR}, #{task_area,jdbcType=VARCHAR},
       #{task_date,jdbcType=VARCHAR}, #{task_startTime,jdbcType=VARCHAR}, #{task_endTime,jdbcType=VARCHAR},
-      #{task_price,jdbcType=INTEGER}, #{task_status,jdbcType=CHAR}, #{task_desc,jdbcType=VARCHAR}
+      #{task_price,jdbcType=INTEGER}, #{task_status,jdbcType=CHAR}, #{task_desc,jdbcType=VARCHAR}, #{task_nowpartin,jdbcType=INTEGER}
       )
   </insert>
   <update id="updateByPrimaryKey" parameterType="com.example.themeleaf.entity.SenseTaskInfo" >
@@ -62,17 +63,18 @@
       task_price = #{task_price,jdbcType=INTEGER},
       task_status = #{task_status,jdbcType=CHAR},
       task_desc = #{task_desc,jdbcType=VARCHAR}
+      task_nowpartin = #{task_nowpartin,jdbcType=INTEGER}
     where tid = #{tid,jdbcType=VARCHAR}
   </update>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
     select tid, task_name, task_from, people_limit, task_type, task_area, task_date,
-    task_startTime, task_endTime, task_price, task_status, task_desc
+    task_startTime, task_endTime, task_price, task_status, task_desc, task_nowpartin
     from sense_task_info
     where tid = #{tid,jdbcType=VARCHAR}
   </select>
   <select id="selectAll" resultMap="BaseResultMap" >
     select s.tid, s.task_name, s.task_from, s.people_limit, s.task_type, s.task_area, s.task_date,
-    s.task_startTime, s.task_endTime, s.task_price, s.task_status, s.task_desc, t.task_id, t.task_userid
+    s.task_startTime, s.task_endTime, s.task_price, s.task_status, s.task_desc, s.task_nowpartin, t.task_id, t.task_userid
     from sense_task_info s left join task_part t on s.tid = t.task_id
   </select>
   <select id="count" resultType="java.lang.Integer">
@@ -80,9 +82,9 @@
   </select>
   <select id="getInfoList" resultMap="BaseResultMap">
     select s.tid, s.task_name, s.task_from, s.people_limit, s.task_type, s.task_area, s.task_date,
-    s.task_startTime, s.task_endTime, s.task_price, s.task_status, s.task_desc, t.task_id, t.task_userid
+    s.task_startTime, s.task_endTime, s.task_price, s.task_status, s.task_desc, s.task_nowpartin, t.task_id, t.task_userid
     from (select tid, task_name, task_from, people_limit, task_type, task_area, task_date,
-    task_startTime, task_endTime, task_price, task_status, task_desc from sense_task_info LIMIT #{before},#{after}) s left join task_part t on s.tid = t.task_id
+    task_startTime, task_endTime, task_price, task_status, task_desc, task_nowpartin from sense_task_info LIMIT #{before},#{after}) s left join task_part t on s.tid = t.task_id
   </select>
 
 </mapper>

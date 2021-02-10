@@ -68,7 +68,8 @@ public class LoginControl {
             Network network =FabricGateway.gateway.getNetwork("mychannel");
             Contract contract = network.getContract("userbasicinfo");
             byte[] resu = contract.submitTransaction("Set", userinfo.getUsername(), userinfo.getEmail(), "0.6", "0.0", userinfo.getUsername());
-            if(!"1".equals(new String(resu))){
+            System.out.println(new String(resu));
+            if("0".equals(new String(resu))){
                 System.out.println( "注册成功");
                 WebSocket ws = new WebSocket();
                 PersonMessage personMessage = new PersonMessage();

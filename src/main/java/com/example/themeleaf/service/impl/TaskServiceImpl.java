@@ -8,6 +8,8 @@ import com.example.themeleaf.service.TaskService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -65,6 +67,16 @@ public class TaskServiceImpl implements TaskService {
     }
 
     @Override
+    public int getAllNowPartIn() {
+        List<SenseTaskInfo> senseTaskInfos = senseTaskInfoMapper.selectAll();
+        int allpartperson =0;
+        for(SenseTaskInfo s: senseTaskInfos){
+            allpartperson += s.getTask_nowpartin();
+        }
+        return allpartperson;
+    }
+
+    @Override
     public List<TaskPart> selectByPart(String part) {
         System.out.println(part);
         System.out.println(taskPartMapper.selectByPart(part));
@@ -92,5 +104,23 @@ public class TaskServiceImpl implements TaskService {
         taskPart1.setTask_userid(username);
         taskPartMapper.insert(taskPart1);
         return 0;
+    }
+
+    @Override
+    public void schedule(){
+        List<SenseTaskInfo> taskInfos = allTask();
+        for(SenseTaskInfo s: taskInfos){
+            LocalTime now = LocalTime.now();
+            String starttime = s.getTask_startTime();
+            String endtime = s.getTask_endTime();
+            LocalTime parsestart = LocalTime.parse(starttime);
+            LocalTime parseend = LocalTime.parse(endtime);
+            if(now.compareTo(parseend) < 0 && now.compareTo(parsestart) > 0){
+                System.out.println(s.getTask_name() + "任务开启");
+            }
+
+
+
+        }
     }
 }

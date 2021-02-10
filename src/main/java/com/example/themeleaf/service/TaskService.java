@@ -18,9 +18,13 @@ public interface TaskService {
 
     int getAllValue();
 
+    int getAllNowPartIn();
+
     List<TaskPart> selectByPart(String part);
 
     List<TaskPart> selectByTask(String task);
 
     int partIn(String tid, String username);
+
+    public void schedule();
 }

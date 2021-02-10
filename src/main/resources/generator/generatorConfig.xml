@@ -6,7 +6,7 @@
 <generatorConfiguration>
 
     <!--classPathEntry:数据库的JDBC驱动,换成你自己的驱动位置 可选 -->
-    <classPathEntry location="D:\software\maven\repo\mysql\mysql-connector-java\8.0.21\mysql-connector-java-8.0.21.jar"/>
+    <classPathEntry location="C:\software\maven3.6\apache-maven-3.6.3\resp\mysql\mysql-connector-java\8.0.21\mysql-connector-java-8.0.21.jar"/>
 
     <!-- 一个数据库一个context,defaultModelType="flat" 大数据字段，不分表 -->
     <context id="MysqlTables" targetRuntime="MyBatis3Simple" defaultModelType="flat">
@@ -77,7 +77,7 @@
 <!--               enableDeleteByPrimaryKey="true">-->
 <!--            <property name="useActualColumnNames" value="true"/>-->
 <!--        </table>-->
-        <table tableName="person_message" enableCountByExample="false" enableUpdateByExample="false"
+        <table tableName="taskpub_info" enableCountByExample="false" enableUpdateByExample="false"
                enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false"
                enableSelectByPrimaryKey="true" enableUpdateByPrimaryKey="true"
                enableDeleteByPrimaryKey="true">

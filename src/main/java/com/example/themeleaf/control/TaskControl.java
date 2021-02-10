@@ -32,6 +32,7 @@ public class TaskControl {
 //    @CrossOrigin
     @RequestMapping("/api/addtask")
     Result  addTask(@RequestBody SenseTaskInfo senseTaskInfo){
+        senseTaskInfo.setTask_nowpartin(0);
         String id = StringUtils.getRandomString(12);
         senseTaskInfo.setTid(id);
         taskService.addTask(senseTaskInfo);
@@ -64,6 +65,12 @@ public class TaskControl {
     int countvalue(){
         return taskService.getAllValue();
     }
+
+    @RequestMapping("/api/countallpartin")
+    int countNowPartIn(){
+        return taskService.getAllNowPartIn();
+    }
+
 //    实现用户获取当前参与情况
 //    @CrossOrigin
     @RequestMapping("/api/querytask")
