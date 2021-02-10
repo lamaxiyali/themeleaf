@@ -87,4 +87,8 @@
     task_startTime, task_endTime, task_price, task_status, task_desc, task_nowpartin from sense_task_info LIMIT #{before},#{after}) s left join task_part t on s.tid = t.task_id
   </select>
 
+  <update id="updateTaskStatus" parameterType="com.example.themeleaf.entity.SenseTaskInfo">
+    update sense_task_info set task_status=#{task_status} where tid=#{tid}
+  </update>
+
 </mapper>

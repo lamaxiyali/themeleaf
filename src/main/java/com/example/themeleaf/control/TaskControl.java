@@ -32,6 +32,8 @@ public class TaskControl {
 //    @CrossOrigin
     @RequestMapping("/api/addtask")
     Result  addTask(@RequestBody SenseTaskInfo senseTaskInfo){
+        String substring = senseTaskInfo.getTask_date().substring(0, 10);
+        senseTaskInfo.setTask_date(substring);
         senseTaskInfo.setTask_nowpartin(0);
         String id = StringUtils.getRandomString(12);
         senseTaskInfo.setTid(id);
@@ -42,6 +44,7 @@ public class TaskControl {
 //    @CrossOrigin
     @RequestMapping("/api/alltask")
     List<SenseTaskInfo> allTask(){
+        taskService.schedule();
         System.out.println(taskService.allTask());
         return taskService.allTask();
     }
@@ -50,6 +53,7 @@ public class TaskControl {
     List<SenseTaskInfo> sectionTask(@RequestBody PageGet pageGet){
         int before = pageGet.getLimit() * (pageGet.getPage() - 1);
         int after = pageGet.getLimit();
+        taskService.schedule();
         return taskService.getInfoList(before, after);
     }
 //    获取目前数据库存储的任务个数

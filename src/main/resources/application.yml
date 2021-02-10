@@ -29,7 +29,9 @@ spring:
           socketFactory:
             class: javax.net.ssl.SSLSocketFactory
       debug: true
-#  security:
+  jackson:
+    time-zone: GMT+8
+  #  security:
 #    user:
 #      name: root
 #      password: root

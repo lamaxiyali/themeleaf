@@ -8,6 +8,7 @@ import com.example.themeleaf.service.TaskService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.ArrayList;
@@ -109,18 +110,43 @@ public class TaskServiceImpl implements TaskService {
     @Override
     public void schedule(){
         List<SenseTaskInfo> taskInfos = allTask();
+        System.out.println("inside schedule");
         for(SenseTaskInfo s: taskInfos){
+            LocalDate nowdate = LocalDate.now();
+            LocalDate nowdb = LocalDate.parse(s.getTask_date());
+            int i = nowdb.compareTo(nowdate);
+            if(i>0){
+                s.setTask_status("未开始");
+                senseTaskInfoMapper.updateTaskStatus(s);
+                continue;
+            }
+            if(i<0){
+                s.setTask_status("已结束");
+                senseTaskInfoMapper.updateTaskStatus(s);
+                continue;
+            }
             LocalTime now = LocalTime.now();
             String starttime = s.getTask_startTime();
             String endtime = s.getTask_endTime();
             LocalTime parsestart = LocalTime.parse(starttime);
             LocalTime parseend = LocalTime.parse(endtime);
             if(now.compareTo(parseend) < 0 && now.compareTo(parsestart) > 0){
+                System.out.println(parsestart);
                 System.out.println(s.getTask_name() + "任务开启");
+                System.out.println(parseend);
+                s.setTask_status("进行中");
+                senseTaskInfoMapper.updateTaskStatus(s);
+                continue;
             }
-
-
-
+            if(now.compareTo(parseend)>=0){
+                s.setTask_status("已结束");
+                senseTaskInfoMapper.updateTaskStatus(s);
+                continue;
+            }
+            if(now.compareTo(parsestart)<=0){
+                s.setTask_status("未开始");
+                senseTaskInfoMapper.updateTaskStatus(s);
+            }
         }
     }
 }

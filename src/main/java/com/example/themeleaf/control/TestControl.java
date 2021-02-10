@@ -17,6 +17,7 @@ public class TestControl {
     TaskService taskService;
     @RequestMapping("/test11")
     public void runTime(){
+        System.out.println("runTime");
         taskService.schedule();
     }
 }

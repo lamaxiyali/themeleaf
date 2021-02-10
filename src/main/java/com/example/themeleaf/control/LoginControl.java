@@ -5,6 +5,7 @@ import com.example.themeleaf.entity.Userinfo;
 import com.example.themeleaf.result.Result;
 import com.example.themeleaf.service.LoginService;
 import com.example.themeleaf.service.PersonInfo;
+import com.example.themeleaf.service.TaskService;
 import com.example.themeleaf.service.WebSocket;
 import com.example.themeleaf.service.impl.FabricGateway;
 import org.apache.shiro.SecurityUtils;
@@ -32,6 +33,8 @@ public class LoginControl {
     LoginService loginService;
     @Resource
     PersonInfo personInfo;
+    @Resource
+    TaskService taskService;
     @CrossOrigin
     @RequestMapping("/api/login")
     @ResponseBody
@@ -41,6 +44,7 @@ public class LoginControl {
         UsernamePasswordToken usernamePasswordToken = new UsernamePasswordToken(username, requestUser.getPassword());
         try {
             subject.login(usernamePasswordToken);
+            taskService.schedule();
             return new Result(200);
         } catch (AuthenticationException e) {
             String message = "账号密码错误";
