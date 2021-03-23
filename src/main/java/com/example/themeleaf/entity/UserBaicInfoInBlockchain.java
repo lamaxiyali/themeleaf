@@ -8,7 +8,7 @@ public class UserBaicInfoInBlockchain {
     private Record record;
 
     @Data
-    class Record {
+    static class Record {
         private String user_name;
         private String docType;
         private String email;

@@ -26,5 +26,6 @@ public interface TaskService {
 
     int partIn(String tid, String username);
 
+    int cancle(String tid);
     public void schedule();
 }

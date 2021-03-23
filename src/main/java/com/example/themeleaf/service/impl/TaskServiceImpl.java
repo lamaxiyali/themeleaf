@@ -108,6 +108,11 @@ public class TaskServiceImpl implements TaskService {
     }
 
     @Override
+    public int cancle(String tid) {
+        return 0;
+    }
+
+    @Override
     public void schedule(){
         List<SenseTaskInfo> taskInfos = allTask();
         System.out.println("inside schedule");

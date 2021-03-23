@@ -24,4 +24,6 @@ public interface SenseTaskInfoMapper {
     List<SenseTaskInfo> getInfoList(int before, int after);
 
     void updateTaskStatus(SenseTaskInfo senseTaskInfo);
+
+    void updateTaskNowPartIn(SenseTaskInfo senseTaskInfo);
 }

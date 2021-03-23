@@ -1,5 +1,7 @@
 package com.example.themeleaf.control;
 
+import com.example.themeleaf.dao.SenseTaskInfoMapper;
+import com.example.themeleaf.entity.AttrSet;
 import com.example.themeleaf.entity.SenseTaskInfo;
 import com.example.themeleaf.entity.TaskPart;
 import com.example.themeleaf.result.Accept;
@@ -20,6 +22,8 @@ import java.util.Map;
 
 @RestController
 public class TaskControl {
+    @Resource
+    SenseTaskInfoMapper senseTaskInfoMapper;
     @Resource
     TaskService taskService;
     @Resource
@@ -106,13 +110,24 @@ public class TaskControl {
     Result partin(@RequestBody Accept accept){
         SecurityManager securityManager = new SecurityManager();
         Subject subject = SecurityUtils.getSubject();
-        System.out.println(accept.getInfo());
         String username = subject.getPrincipal().toString();
+        SenseTaskInfo senseTaskInfo = senseTaskInfoMapper.selectByPrimaryKey(accept.getInfo());
+        System.out.println(senseTaskInfo.getPeople_limit());
+        System.out.println(senseTaskInfo.getTask_nowpartin());
+        System.out.println(senseTaskInfo.getPeople_limit().equals(senseTaskInfo.getTask_nowpartin()));
+        if(senseTaskInfo.getPeople_limit().equals(senseTaskInfo.getTask_nowpartin())){
+            return new Result(401);
+        }
         int re = taskService.partIn(accept.getInfo(), username);
         if (re == 0) {
             return new Result(200);
         }
         return new Result(400);
+    }
+// 取消弹出框
+    @RequestMapping("/api/cancle")
+    Result cancle(@RequestBody AttrSet attrSet){
+        return new Result(200);
     }
 
 

@@ -91,4 +91,8 @@
     update sense_task_info set task_status=#{task_status} where tid=#{tid}
   </update>
 
+  <update id="updateTaskNowPartIn" parameterType="com.example.themeleaf.entity.SenseTaskInfo">
+    update sense_task_info set task_nowpartin=#{task_nowpartin} where tid=#{tid}
+  </update>
+
 </mapper>

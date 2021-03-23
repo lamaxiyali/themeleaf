@@ -13,11 +13,17 @@ public class UserAttributeSet {
         private String docType;
         private String user_id;
         private String task_id;
+//范围：任务价格/任务允许参与人数
         private int ep ;
+//范围：1-10次
         private int ad ;
+//范围：10-100s
         private int at;
+//范围：1-1000m
         private int pl;
+//范围：5-50m
         private int pa;
+//范围：目前默认为0
         private int bn;
 
     }
