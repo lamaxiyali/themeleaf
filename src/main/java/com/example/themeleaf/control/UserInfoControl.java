@@ -73,6 +73,7 @@ public class UserInfoControl {
     @RequestMapping(value = "/api/user/systemmessage")
     public List<PersonMessage> getSystemMessage(){
         List<PersonMessage> personMessages = personInfo.getAllSystemMessage("system");
+
         return personMessages;
     }
 
